@@ -8,6 +8,13 @@ module.exports = function(mode) {
 			port: envConfig.app.port
 		},
 		routes: {
+			home: {
+				url: '/',
+				page: 'index.html',
+				locals: {
+					title: 'Node CMS | Home'
+				}
+			},
 			admin: {
 				panel: {
 					url: '/panel',
@@ -37,6 +44,22 @@ module.exports = function(mode) {
 						title: 'CMS Admin Dashboard | Settings'
 					}
 				},
+			},
+			error: {
+				notFound: {
+					url: '/404',
+					page: '404.html',
+					locals: {
+
+					}
+				},
+				server: {
+					url: '/500',
+					page: '500.html',
+					locals: {
+
+					}
+				}
 			}
 		}
 	};
