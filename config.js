@@ -19,8 +19,24 @@ module.exports = function(mode) {
 				users: {
 					url: '/panel/users',
 					page: 'admin/users.html',
-					title: 'CMS Admin Dashboard | Users'
-				}
+					locals: {
+						title: 'CMS Admin Dashboard | Users',
+						users: [{
+							name: 'John',
+							permissions: 'superuser'
+						}, {
+							name: 'Jane',
+							permissions: 'admin'
+						}]
+					}
+				},
+				settings: {
+					url: '/panel/settings',
+					page: 'admin/settings.html',
+					locals: {
+						title: 'CMS Admin Dashboard | Settings'
+					}
+				},
 			}
 		}
 	};

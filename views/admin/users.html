@@ -1,4 +1,26 @@
 <%- contentFor('body') %>
-<% for (var i = 0; i < users.length; i++) { %>
-<li><%= user.name %>, <%= user.permissions %></li>
-<% } %>
+<div class="off-canvas-wrap">
+	<div class="inner-wrap">
+		<nav class="tab-bar">
+			<section class="left-small">
+				<a class="left-off-canvas-toggle menu-icon" ><span></span></a>
+			</section>
+			<section class="middle tab-bar-section">
+				<h1 class="title"><a href="/panel">Dashboard</a></h1>
+			</section>
+		</nav>
+		<aside class="left-off-canvas-menu">
+			<ul class="off-canvas-list">
+				<li><label>Menu</label></li>
+				<li><a href="/panel/users">Users</a></li>
+				<li><a href="/panel/settings">Settings</a></li>
+			</ul>
+		</aside>
+		<section class="main-section">
+			<% for (var i = 0; i < users.length; i++) { %>
+			<li><%= users[i].name %>, <%= users[i].permissions %></li>
+			<% } %>
+		</section>
+		<a class="exit-off-canvas"></a>
+	</div>
+</div>
