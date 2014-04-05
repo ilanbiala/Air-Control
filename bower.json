@@ -1,0 +1,22 @@
+{
+	"name": "node-cms",
+	"version": "0.0.1",
+	"homepage": "https://github.com/ilanbiala/node-cms",
+	"authors": [
+		"Eytan Biala",
+		"Ilan Biala"
+	],
+	"description": "A CMS built atop Node.js",
+	"license": "MIT",
+	"ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components",
+		"test",
+		"tests"
+	],
+	"dependencies": {
+		"angular-latest": "~1.2.10",
+		"foundation": "~5.2.0",
+	}
+}
