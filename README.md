@@ -1,7 +1,4 @@
-website
+Node CMS
 =======
 
-My website
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ilanbiala/website/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
+To start the server, run `node-dev app.js`.
