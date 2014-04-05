@@ -50,5 +50,11 @@ app.get(config.routes.admin.panel.url, function(req, res) {
 	});
 });
 
+app.get(config.routes.admin.users.url, function(req, res) {
+	res.render(config.routes.users.panel.page, {
+		locals: config.routes.users.panel.locals
+	});
+});
+
 app.listen(config.app.port);
 console.log('Express server listening on port ' + config.app.port + ' in ' + config.app.environment + ' mode.');
