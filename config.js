@@ -1,14 +1,22 @@
-var config = {
-	development: {
-		environment: 'development',
-		port: 3000
-	},
-	production: {
-		environment: 'production',
-		port: 80
-	}
-};
-
 module.exports = function(mode) {
-	return config[mode || process.argv[2] || 'development'] || config.development;
+	var envConfig = require('./config/' + (mode || process.env.NODE_ENV || 'development'));
+	return {
+		db: envConfig.db,
+		app: {
+			environment: envConfig.app.environment,
+			name: envConfig.app.name,
+			port: envConfig.app.port
+		},
+		routes: {
+			admin: {
+				panel: {
+					url: '/panel',
+					page: 'admin/panel.html',
+					locals: {
+						title: 'CMS Admin Dashboard'
+					}
+				}
+			}
+		}
+	};
 };

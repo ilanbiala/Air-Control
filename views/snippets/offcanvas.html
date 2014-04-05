@@ -1,0 +1,52 @@
+<div class="off-canvas-wrap">
+	<div class="inner-wrap">
+		<nav class="tab-bar">
+
+			<% if (offcanvasLeft) { %>
+			<section class="left-small">
+				<a class="left-off-canvas-toggle menu-icon" ><span></span></a>
+			</section>
+			<% } %>
+
+			<section class="middle tab-bar-section">
+				<h1 class="title"><%= offcanvasTitle %></h1>
+			</section>
+
+			<% if (offcanvasRight) { %>
+			<section class="right-small">
+				<a class="right-off-canvas-toggle menu-icon" ><span></span></a>
+			</section>
+			<% } %>
+
+		</nav>
+
+		<% if (offcanvasLeft) { %>
+		<aside class="left-off-canvas-menu">
+			<ul class="off-canvas-list">
+				<li><label><%= offcanvasMenuTitle %></label></li>
+				<% for (var i = 0; i < offcanvasMenuItems.length; i++) { %>
+				<li><a href="#"><%= offcanvasMenuItems[i] %></a></li>
+				<% } %>
+			</ul>
+		</aside>
+		<% } %>
+
+		<% if (offcanvasRight) { %>
+		<aside class="right-off-canvas-menu">
+			<ul class="off-canvas-list">
+				<li><label>Users</label></li>
+				<li><a href="#">Hari Seldon</a></li>
+				<li><a href="#">...</a></li>
+			</ul>
+		</aside>
+		<% } %>
+
+		<section class="main-section">
+			<!-- content goes here -->
+			<%- offcanvasContent %>
+		</section>
+
+		<a class="exit-off-canvas"></a>
+
+	</div>
+</div>

@@ -16,7 +16,7 @@
 		"tests"
 	],
 	"dependencies": {
-		"angular-latest": "~1.2.10",
-		"foundation": "~5.2.0"
+		"foundation": "~5.2.0",
+		"angular": "~1.2.16"
 	}
 }
