@@ -51,8 +51,8 @@ app.get(config.routes.admin.panel.url, function(req, res) {
 });
 
 app.get(config.routes.admin.users.url, function(req, res) {
-	res.render(config.routes.users.panel.page, {
-		locals: config.routes.users.panel.locals
+	res.render(config.routes.admin.users.page, {
+		locals: config.routes.admin.users.locals
 	});
 });
 
