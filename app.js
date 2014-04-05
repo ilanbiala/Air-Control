@@ -2,12 +2,10 @@ var express = require('express'),
 	app = module.exports = express(),
 	morgan = require('morgan'), // logger
 	bodyParser = require('body-parser'), // access form data
-	domain = require("domain"),
 	expressEjsLayouts = require('express-ejs-layouts'),
 	favicon = require('static-favicon'), // favicon handler
 	passport = require('passport'), // passport authentication
 	sass = require('node-sass'); // sass middleware
-
 
 var config = require('./config.js')();
 
@@ -46,27 +44,17 @@ app.get('/', function(req, res) {
 	});
 });
 
-app.get('/test', function(req, res) {
-	throw new Error('adsf');
-});
-
 app.get(config.routes.admin.panel.url, function(req, res) {
 	res.render(config.routes.admin.panel.page, {
 		locals: config.routes.admin.panel.locals
 	});
 });
 
-var d = domain.create();
-
-d.on('error', function(er) {
-	//your handler here    
-	console.log("er");
-	// console.log(er);
+app.get(config.routes.admin.users.url, function(req, res) {
+	res.render(config.routes.admin.users.page, {
+		locals: config.routes.admin.users.locals
+	});
 });
 
-d.run(function() {
-	//create the server here, 
-	//errors thrown will be handled by the domain handler
-	app.listen(config.app.port);
-	console.log('Express server listening on port ' + config.app.port + ' in ' + config.app.environment + ' mode.');
-});
+app.listen(config.app.port);
+console.log('Express server listening on port ' + config.app.port + ' in ' + config.app.environment + ' mode.');

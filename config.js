@@ -15,6 +15,11 @@ module.exports = function(mode) {
 					locals: {
 						title: 'CMS Admin Dashboard'
 					}
+				},
+				users: {
+					url: '/panel/users',
+					page: 'admin/users.html',
+					title: 'CMS Admin Dashboard | Users'
 				}
 			}
 		}
