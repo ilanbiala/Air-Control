@@ -2,6 +2,7 @@ var express = require('express'),
 	app = module.exports = express(),
 	morgan = require('morgan'), // logger
 	domain = require('domain'),
+	expressValidator = require('express-validator'),
 	errorHandler = require('express-error-handler'),
 	bodyParser = require('body-parser'), // access form data
 	favicon = require('static-favicon'), // favicon handler
@@ -12,22 +13,9 @@ var express = require('express'),
 
 var config = require('./server/config/config.js')();
 
-/**
- * Models
- */
-
-require('./server/models/user');
-
-mongoose.connect(config.db.host, config.db.database);
-db.on('error', console.error.bind(console, 'Error:'));
-db.once('open', function() {
-
-});
-
-var users = require('./server/routes/users')(app, passport);
-
 app.use(morgan('dev'));
 app.use(bodyParser());
+app.use(expressValidator([])); // this line must be immediately after express.bodyParser()!
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -53,6 +41,20 @@ app.use(function(err, req, res, next) {
 	}
 });
 */
+
+/**
+ * Models
+ */
+
+require('./server/models/user');
+
+mongoose.connect(config.db.host, config.db.database);
+db.on('error', console.error.bind(console, 'Error:'));
+db.once('open', function() {
+
+});
+
+var users = require('./server/routes/users')(app, passport);
 
 // development only
 if (config.app.enviroment == 'development') {
