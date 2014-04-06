@@ -63,6 +63,12 @@ app.get(config.routes.admin.users.url, function(req, res) {
 	});
 });
 
+app.get(config.routes.admin.settings.url, function(req, res) {
+	res.render(config.routes.admin.settings.page, {
+		locals: config.routes.admin.settings.locals
+	});
+});
+
 // 404 page
 app.get(config.routes.error.notFound.url, function(req, res) {
 	res.render(config.routes.error.notFound.page, {
