@@ -1,5 +1,7 @@
 <% include ../snippets/header.html %>
 
+<link rel="stylesheet" href="/fonts/foundation/foundation-icons.css">
+<link rel="stylesheet" href="/fonts/foundation/foundation-icons.ttf">
 <link rel="stylesheet" href="/styles/admin/panel.css">
 <link rel="stylesheet" href="/styles/admin/settings.css">
 <div class="off-canvas-wrap">
@@ -20,25 +22,25 @@
 			</ul>
 		</aside>
 		<section class="main-section">
-			<% for (var i = 0; i < users.length; i++) { %>
-			<li><%= users[i].name %>, <%= users[i].permissions %></li>
-			<% } %>
+		<br>
 			<table>
 				<thead>
 					<tr>
-					<th>User</th>
+						<th>User</th>
 						<th>Role</th>
 						<th>Change Role</th>
 						<th>Remove User?</th>
 					</tr>
 				</thead>
 				<tbody>
+					<% for (var i = 0; i < users.length; i++) { %>
 					<tr>
-						<td>Content Goes Here</td>
-						<td>This is longer Content Goes Here Donec id elit non mi porta gravida at eget metus.</td>
-						<td>Content Goes Here</td>
-						<td>Content Goes Here</td>
+						<td><%= users[i].name %></td>
+						<td><%= users[i].permissions %></td>
+						<td>select</td>
+						<td><a href="#"><i class="fi-x"></i></a></td>
 					</tr>
+					<% } %>
 				</tbody>
 			</table>
 		</section>
