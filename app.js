@@ -1,11 +1,14 @@
 var express = require('express'),
 	app = module.exports = express(),
 	morgan = require('morgan'), // logger
+	domain = require('domain'),
+	errorHandler = require('express-error-handler'),
 	bodyParser = require('body-parser'), // access form data
 	expressEjsLayouts = require('express-ejs-layouts'),
 	favicon = require('static-favicon'), // favicon handler
 	passport = require('passport'), // passport authentication
 	sass = require('node-sass'); // sass middleware
+
 
 var config = require('./config.js')();
 
@@ -18,8 +21,8 @@ app.engine('.html', require('ejs').__express);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'html');
 
-app.set('layout', 'admin/layout');
-app.use(expressEjsLayouts);
+// app.set('layout', 'admin/layout');
+// app.use(expressEjsLayouts);
 
 app.use(sass.middleware({
 	src: __dirname + '/public/sass',
@@ -29,6 +32,19 @@ app.use(sass.middleware({
 
 app.use(express.static(__dirname + '/public'));
 app.use(favicon(__dirname + '/images/favicon.ico'));
+
+app.use(function(err, req, res, next) {
+	// only handle `next(err)` calls
+	if (err) {
+		console.log('404');
+		res.sendfile('404.html');
+	}
+});
+
+// app.use(errorHandler({
+// 	dumpExceptions: true,
+// 	showStack: true
+// }));
 
 // development only
 if (config.app.enviroment == 'development') {
@@ -56,5 +72,40 @@ app.get(config.routes.admin.users.url, function(req, res) {
 	});
 });
 
-app.listen(config.app.port);
-console.log('Express server listening on port ' + config.app.port + ' in ' + config.app.environment + ' mode.');
+app.get('/test', function(req, res, next) {
+	// throw new Error("test1232");
+	// res.sendfile('views/404.html');
+	res.render('404');
+});
+
+// app.use(function(err, req, res, next) {
+// 	if (err instanceof NotFound) {
+// 		res.render('errors/404');
+// 	} else {
+// 		res.render('errors/500', {
+// 			error: err,
+// 			stack: err.stack
+// 		});
+// 	}
+// });
+
+var serverDomain = domain.create();
+
+serverDomain.run(function() {
+	app.listen(config.app.port, function() {
+
+		console.log('Express server listening on port ' + config.app.port + ' in ' + config.app.environment + ' mode.');
+
+		var reqd = domain.create();
+
+		reqd.on('error', function(er) {
+			console.error('Error', er, req.url);
+			try {
+				res.writeHead(500);
+				res.end('Error occurred, sorry.');
+			} catch (er) {
+				console.error('Error sending 500', er, req.url);
+			}
+		});
+	});
+});

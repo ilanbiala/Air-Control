@@ -40,6 +40,6 @@
     "passport-local-mongoose": "~0.3.0",
     "node-sass": "~0.8.4",
     "express-ejs-layouts": "~0.3.1",
-    "domain": "~0.2.8"
+    "express-error-handler": "~0.5.4"
   }
 }
