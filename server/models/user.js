@@ -22,6 +22,7 @@ var UserSchema = new Schema({
 		type: String,
 		default: 'authenticated'
 	}],
+	// superuser, administrator, writer (cannot publish), editor (can publish)
 	hashed_password: String,
 	salt: String,
 });

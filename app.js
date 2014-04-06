@@ -17,7 +17,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.engine('.html', require('ejs').__express);
-app.set('views', __dirname + '/views');
+app.set('views', __dirname + '/server/views');
 app.set('view engine', 'html');
 
 app.use(sass.middleware({
