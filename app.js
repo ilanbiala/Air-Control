@@ -6,10 +6,19 @@ var express = require('express'),
 	bodyParser = require('body-parser'), // access form data
 	favicon = require('static-favicon'), // favicon handler
 	passport = require('passport'), // passport authentication
-	sass = require('node-sass'); // sass middleware
-
+	sass = require('node-sass'), // sass middleware
+	mongoose = require('mongoose'),
+	db = mongoose.connection;
 
 var config = require('./server/config/config.js')();
+
+mongoose.connect(config.db.host, config.db.database);
+db.on('error', console.error.bind(console, 'Error:'));
+db.once('open', function() {
+
+});
+
+var users = require('./server/routes/users')(app, passport);
 
 app.use(morgan('dev'));
 app.use(bodyParser());

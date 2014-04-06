@@ -3,11 +3,7 @@ module.exports = function(mode) {
 	var envConfig = require('./env/' + env);
 	return {
 		db: envConfig.db,
-		app: {
-			environment: envConfig.app.environment,
-			name: envConfig.app.name,
-			port: envConfig.app.port
-		},
+		app: envConfig.app,
 		routes: {
 			home: {
 				url: '/',

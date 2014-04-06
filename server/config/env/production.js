@@ -1,5 +1,8 @@
 module.exports = {
-	db: 'mongodb://localhost/production',
+	db: {
+		host: 'localhost',
+		database: 'production'
+	},
 	app: {
 		environment: 'production',
 		name: 'Node CMS',
