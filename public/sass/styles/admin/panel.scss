@@ -11,3 +11,19 @@
 	-moz-box-shadow: -6px -16px 25px 0 rgba(0, 0, 0, 0.5);
 	box-shadow: -6px -16px 25px 0 rgba(0, 0, 0, 0.5);
 }
+
+@media screen and (min-width: 600px) {
+	.left-small {
+		.left-off-canvas-toggle {
+			display: none;
+		}
+	}
+	.left-off-canvas-menu {
+		-webkit-transform: inherit;
+		-moz-transform: inherit;
+		-ms-transform: inherit;
+		-o-transform: inherit;
+		transform: inherit;
+		position: relative;
+	}
+}
