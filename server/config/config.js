@@ -31,10 +31,12 @@ module.exports = function(mode) {
 						title: 'CMS Admin Dashboard | Users',
 						users: [{
 							name: 'John',
-							permissions: 'superuser'
+							permissions: 'superuser',
+							_id: 'abc'
 						}, {
 							name: 'Jane',
-							permissions: 'admin'
+							permissions: 'admin',
+							_id: 'def'
 						}]
 					}
 				},
