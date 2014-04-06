@@ -9,7 +9,6 @@ module.exports = function(passport, db) {
 
     // Bootstrap passport config
     require(appPath + '/server/config/passport')(passport);
-    bootstrapDependencies();
 
     // Express settings
     var app = express();
@@ -31,28 +30,6 @@ module.exports = function(passport, db) {
             });
         };
         walk(models_path);
-    }
-
-    function bootstrapDependencies() {
-        // Register passport dependency
-        mean.register('passport', function() {
-            return passport;
-        });
-
-        // Register auth dependency
-        mean.register('auth', function() {
-            return require(appPath + '/server/routes/middlewares/authorization');
-        });
-
-        // Register database dependency
-        mean.register('database', {
-            connection: db
-        });
-
-        // Register app dependency
-        mean.register('app', function() {
-            return app;
-        });  
     }
 
     return app;

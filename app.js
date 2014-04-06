@@ -12,6 +12,12 @@ var express = require('express'),
 
 var config = require('./server/config/config.js')();
 
+/**
+ * Models
+ */
+
+require('./server/models/user');
+
 mongoose.connect(config.db.host, config.db.database);
 db.on('error', console.error.bind(console, 'Error:'));
 db.once('open', function() {
@@ -38,6 +44,7 @@ app.use(sass.middleware({
 app.use(express.static(__dirname + '/public'));
 app.use(favicon(__dirname + '/images/favicon.ico'));
 
+/*
 app.use(function(err, req, res, next) {
 	// only handle `next(err)` calls
 	if (err) {
@@ -45,6 +52,7 @@ app.use(function(err, req, res, next) {
 		res.sendfile('404.html');
 	}
 });
+*/
 
 // development only
 if (config.app.enviroment == 'development') {
