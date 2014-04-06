@@ -11,8 +11,8 @@ var mongoose = require('mongoose'),
  * User Schema
  */
 var UserSchema = new Schema({
-	firstName: String
-	lastName: String
+	firstName: String,
+	lastName: String,
 	email: String,
 	username: {
 		type: String,
