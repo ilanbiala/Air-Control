@@ -11,9 +11,15 @@ var mongoose = require('mongoose'),
  * User Schema
  */
 var UserSchema = new Schema({
-	firstName: String,
-	lastName: String,
-	email: String,
+	firstName: {
+		type: String
+	},
+	lastName: {
+		type: String
+	},
+	email: {
+		type: String
+	},
 	username: {
 		type: String,
 		unique: true
@@ -23,8 +29,14 @@ var UserSchema = new Schema({
 		default: 'authenticated'
 	}],
 	// superuser, administrator, writer (cannot publish), editor (can publish)
-	hashed_password: String,
-	salt: String,
+	hashed_password: {
+		type: String
+	},
+	salt: {
+		type: String
+	}
+}, {
+	collection: 'user'
 });
 
 /**
@@ -38,6 +50,8 @@ UserSchema.virtual('password').set(function(password) {
 	return this._password;
 });
 
+var User = mongoose.model('User', UserSchema);
+
 /**
  * Validation
  */
@@ -45,19 +59,19 @@ var validatePresenceOf = function(value) {
 	return value && value.length;
 };
 
-UserSchema.path('name').validate(function(name) {
+User.schema.path('firstName').validate(function(name) {
 	return (typeof name === 'string' && name.length > 0);
-}, 'Name cannot be blank');
+}, 'First name cannot be blank');
 
-UserSchema.path('email').validate(function(email) {
+User.schema.path('email').validate(function(email) {
 	return (typeof email === 'string' && email.length > 0);
 }, 'Email cannot be blank');
 
-UserSchema.path('username').validate(function(username) {
+User.schema.path('username').validate(function(username) {
 	return (typeof username === 'string' && username.length > 0);
 }, 'Username cannot be blank');
 
-UserSchema.path('hashed_password').validate(function(hashed_password) {
+User.schema.path('hashed_password').validate(function(hashed_password) {
 	return (typeof hashed_password === 'string' && hashed_password.length > 0);
 }, 'Password cannot be blank');
 
@@ -68,10 +82,11 @@ UserSchema.path('hashed_password').validate(function(hashed_password) {
 UserSchema.pre('save', function(next) {
 	if (!this.isNew) return next();
 
-	if (!validatePresenceOf(this.password) && !this.provider)
+	if (!validatePresenceOf(this.password) && !this.provider) {
 		next(new Error('Invalid password'));
-	else
+	} else {
 		next();
+	}
 });
 
 /**
@@ -142,4 +157,4 @@ UserSchema.methods = {
 	}
 };
 
-mongoose.model('User', UserSchema);
+// module.exports = User;
