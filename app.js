@@ -2,7 +2,7 @@ var express = require('express'),
 	app = module.exports = express(),
 	morgan = require('morgan'), // logger
 	domain = require('domain'),
-	expressValidator = require('express-validator'),
+	// expressValidator = require('express-validator'),
 	errorHandler = require('express-error-handler'),
 	bodyParser = require('body-parser'), // access form data
 	favicon = require('static-favicon'), // favicon handler
@@ -15,7 +15,7 @@ var config = require('./server/config/config.js')();
 
 app.use(morgan('dev'));
 app.use(bodyParser());
-app.use(expressValidator([])); // this line must be immediately after express.bodyParser()!
+// app.use(expressValidator([])); // this line must be immediately after express.bodyParser()!
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -32,15 +32,13 @@ app.use(sass.middleware({
 app.use(express.static(__dirname + '/public'));
 app.use(favicon(__dirname + '/images/favicon.ico'));
 
-/*
 app.use(function(err, req, res, next) {
 	// only handle `next(err)` calls
 	if (err) {
-		console.log('404');
-		res.sendfile('404.html');
+		console.log('error');
+		res.redirect('error');
 	}
 });
-*/
 
 /**
  * Models
@@ -104,6 +102,7 @@ app.get(config.routes.error.server.url, function(req, res) {
 
 app.get('/error', function(req, res) {
 	res.render('error', {
+		title: 'Node CMS | Error',
 		url: req.url,
 		originalUrl: req.originalUrl,
 		user: req.session ? req.session.user : null

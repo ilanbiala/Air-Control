@@ -2,8 +2,6 @@ var fs = require('fs'),
     express = require('express'),
     appPath = process.cwd();
 
-var mean = require('meanio');
-
 module.exports = function(passport, db) {
     bootstrapModels();
 
