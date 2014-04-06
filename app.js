@@ -4,7 +4,6 @@ var express = require('express'),
 	domain = require('domain'),
 	errorHandler = require('express-error-handler'),
 	bodyParser = require('body-parser'), // access form data
-	expressEjsLayouts = require('express-ejs-layouts'),
 	favicon = require('static-favicon'), // favicon handler
 	passport = require('passport'), // passport authentication
 	sass = require('node-sass'); // sass middleware
@@ -20,9 +19,6 @@ app.use(passport.session());
 app.engine('.html', require('ejs').__express);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'html');
-
-// app.set('layout', 'admin/layout');
-// app.use(expressEjsLayouts);
 
 app.use(sass.middleware({
 	src: __dirname + '/public/sass',
@@ -41,14 +37,12 @@ app.use(function(err, req, res, next) {
 	}
 });
 
-// app.use(errorHandler({
-// 	dumpExceptions: true,
-// 	showStack: true
-// }));
-
 // development only
 if (config.app.enviroment == 'development') {
-	app.use(express.errorHandler());
+	app.use(errorHandler({
+		dumpExceptions: true,
+		showStack: true
+	}));
 }
 
 app.get(config.routes.home.url, function(req, res) {
