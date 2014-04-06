@@ -5,24 +5,28 @@ var users = require('../controllers/users');
 
 module.exports = function(app, passport) {
 
-    app.get('/logout', users.signout);
-    app.get('/users/me', users.me);
+	app.get('/panel/logout', users.signout);
+	// app.get('/panel/users/me', users.me);
 
-    // Setup up the users api
-    app.post('/register', users.create);
+	// Setup up the users api
+	app.post('/panel/users/create', users.create);
 
-    // Setup the userId param
-    app.param('userId', users.user);
+	// Setup the userId param
+	app.param('userId', users.user);
 
-    // Route to check if user is authenticated
-    app.get('/loggedin', function(req, res) {
-        res.send(req.isAuthenticated() ? req.user.name : '0');
-    });
+	// Route to check if user is authenticated
+	app.get('/panel/loggedin', function(req, res) {
+		res.send(req.isAuthenticated() ? req.user.name : '0');
+	});
 
-    // Setting the local strategy route
-    app.post('/login', passport.authenticate('local', {
-        failureFlash: true
-    }), function(req, res) {
-        res.saend(req.user.name);
-    });
+	app.get('/panel/users/remove/:id', function(req, res) {
+		res.render('/panel/users', {});
+	});
+
+	// Setting the local strategy route
+	app.post('/panel/login', passport.authenticate('local', {
+		failureFlash: true
+	}), function(req, res) {
+		res.send(req.user.name);
+	});
 };

@@ -22,7 +22,7 @@
 			</ul>
 		</aside>
 		<section class="main-section">
-		<br>
+			<br>
 			<table>
 				<thead>
 					<tr>
@@ -43,6 +43,85 @@
 					<% } %>
 				</tbody>
 			</table>
+			<br>
+			<form method="POST" action="/panel/users/create">
+				<div class="row">
+					<div class="small-8">
+						<div class="row">
+							<div class="small-3 columns">
+							<label for="user-first-name" class="right inline">First name</label>
+							</div>
+							<div class="small-9 columns">
+								<input type="text" id="user-first-name" placeholder="Johnny">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-8">
+						<div class="row">
+							<div class="small-3 columns">
+							<label for="user-last-name" class="right inline">Last name</label>
+							</div>
+							<div class="small-9 columns">
+								<input type="text" id="user-last-name" placeholder="Appleseed">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-8">
+						<div class="row">
+							<div class="small-3 columns">
+							<label for="user-email" class="right inline">Email</label>
+							</div>
+							<div class="small-9 columns">
+								<input type="email" id="user-email" placeholder="johnny.appleseed@gmail.com">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-8">
+						<div class="row">
+							<div class="small-3 columns">
+							<label for="user-username" class="right inline">Username</label>
+							</div>
+							<div class="small-9 columns">
+								<input type="text" id="user-username" placeholder="johnny.appleseed">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-8">
+						<div class="row">
+							<div class="small-3 columns">
+							<label for="user-role" class="right inline">Role</label>
+							</div>
+							<div class="small-9 columns">
+								<select id="user-role">
+									<option value="superuser">Superuser</option>
+									<option value="administrator">Administrator</option>
+									<option value="editor">Editor</option>
+									<option value="writer">writer</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-8">
+						<div class="row">
+							<div class="small-9 columns">
+							</div>
+							<div class="small-3 columns">
+							<button type="submit">Submit!</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
 		</section>
 		<a class="exit-off-canvas"></a>
 	</div>
