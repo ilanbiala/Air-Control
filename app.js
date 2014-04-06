@@ -10,7 +10,7 @@ var express = require('express'),
 	sass = require('node-sass'); // sass middleware
 
 
-var config = require('./config.js')();
+var config = require('./server/config/config.js')();
 
 app.use(morgan('dev'));
 app.use(bodyParser());
@@ -70,35 +70,26 @@ app.get(config.routes.admin.users.url, function(req, res) {
 });
 
 // 404 page
-// app.get(config.routes.error.notFound.url, function(req, res) {
-// 	res.render(config.routes.error.notFound.page, {
-// 		locals: config.routes.error.notFound.locals
-// 	});
-// });
-
-// 500 page
-// app.get(config.routes.error.server.url, function(req, res) {
-// 	res.render(config.routes.error.server.page, {
-// 		locals: config.routes.error.server.locals
-// 	});
-// });
-
-app.get('/test', function(req, res, next) {
-	// throw new Error("test1232");
-	// res.sendfile('views/404.html');
-	res.render('404');
+app.get(config.routes.error.notFound.url, function(req, res) {
+	res.render(config.routes.error.notFound.page, {
+		locals: config.routes.error.notFound.locals
+	});
 });
 
-// app.use(function(err, req, res, next) {
-// 	if (err instanceof NotFound) {
-// 		res.render('errors/404');
-// 	} else {
-// 		res.render('errors/500', {
-// 			error: err,
-// 			stack: err.stack
-// 		});
-// 	}
-// });
+// 500 page
+app.get(config.routes.error.server.url, function(req, res) {
+	res.render(config.routes.error.server.page, {
+		locals: config.routes.error.server.locals
+	});
+});
+
+app.get('/error', function(req, res) {
+	res.render('error', {
+		url: req.url,
+		originalUrl: req.originalUrl,
+		user: req.session ? req.session.user : null
+	});
+});
 
 var serverDomain = domain.create();
 
