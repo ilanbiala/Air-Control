@@ -51,12 +51,9 @@ if (config.app.enviroment == 'development') {
 	app.use(express.errorHandler());
 }
 
-app.get('/', function(req, res) {
-	res.render('index', {
-		locals: {
-			title: 'NODE-CMS',
-			page: 'home'
-		}
+app.get(config.routes.home.url, function(req, res) {
+	res.render(config.routes.home.page, {
+		locals: config.routes.home.locals
 	});
 });
 
@@ -71,6 +68,20 @@ app.get(config.routes.admin.users.url, function(req, res) {
 		locals: config.routes.admin.users.locals
 	});
 });
+
+// 404 page
+// app.get(config.routes.error.notFound.url, function(req, res) {
+// 	res.render(config.routes.error.notFound.page, {
+// 		locals: config.routes.error.notFound.locals
+// 	});
+// });
+
+// 500 page
+// app.get(config.routes.error.server.url, function(req, res) {
+// 	res.render(config.routes.error.server.page, {
+// 		locals: config.routes.error.server.locals
+// 	});
+// });
 
 app.get('/test', function(req, res, next) {
 	// throw new Error("test1232");
