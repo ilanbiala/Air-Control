@@ -1,3 +1,7 @@
+function removeUserFromTable(user) {
+	$('#' + user).remove();
+}
+
 $(document).ready(function() {
 	$(document).foundation();
 
@@ -16,10 +20,12 @@ $(document).ready(function() {
 			url: '/panel/users/' + whichUserToDelete,
 			type: 'DELETE'
 		}).done(function(response) {
-			alert('Response: ' + response);
-			console.log(response);
-			$('#removeUserModal').foundation('reveal', 'close');
-			$('.alert-box.success ').trigger('open.fndtn.alert-box');
+			if (response.success === true) {
+				$('#removeUserModal').foundation('reveal', 'close');
+				$('.alert-box.success ').trigger('open.fndtn.alert-box');
+				removeUserFromTable(whichUserToDelete);
+				whichUserToDelete = null;
+			}
 		}).fail(function(err) {
 			alert('Error: ' + err);
 			console.log(err);
@@ -28,3 +34,4 @@ $(document).ready(function() {
 		});
 	});
 });
+

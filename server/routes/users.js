@@ -34,7 +34,7 @@ module.exports = function(app, passport) {
 
 	app.del('/panel/users/:id', function(req, res) {
 		res.json({
-
+			"success": true
 		});
 	});
 

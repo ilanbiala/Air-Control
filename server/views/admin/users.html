@@ -36,7 +36,7 @@
 				</thead>
 				<tbody>
 					<% for (var i = 0; i < users.length; i++) { %>
-					<tr>
+					<tr id="<%= users[i]._id %>">
 						<td><%= users[i].firstName %> <%= users[i].lastName %></td>
 						<td><%= users[i].username %></td>
 						<td><%= users[i].email %></td>
@@ -144,7 +144,7 @@
 							<div class="small-8 columns">
 							</div>
 							<div class="small-4 columns">
-								<button type="submit">Submit!</button>
+								<button type="submit">Add user!</button>
 							</div>
 						</div>
 					</div>
