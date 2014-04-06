@@ -1,5 +1,6 @@
 module.exports = function(mode) {
-	var envConfig = require('./config/' + (mode || process.env.NODE_ENV || 'development'));
+	var env = (mode || process.env.NODE_ENV || 'development');
+	var envConfig = require('./env/' + env);
 	return {
 		db: envConfig.db,
 		app: {
