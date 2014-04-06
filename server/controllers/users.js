@@ -11,113 +11,114 @@ var User = mongoose.model('User');
  * Auth callback
  */
 exports.authCallback = function(req, res) {
-    res.redirect('/');
+	res.redirect('/');
 };
 
 /**
  * Show login form
  */
 exports.signin = function(req, res) {
-    if (req.isAuthenticated()) {
-        return res.redirect('/');
-    }
-    res.redirect('#!/login');
+	if (req.isAuthenticated()) {
+		return res.redirect('/');
+	}
+	res.redirect('#!/login');
 };
 
 /**
  * Logout
  */
 exports.signout = function(req, res) {
-    req.logout();
-    res.redirect('/');
+	req.logout();
+	res.redirect('/');
 };
 
 /**
  * Session
  */
 exports.session = function(req, res) {
-    res.redirect('/');
+	res.redirect('/');
 };
 
 /**
  * Create user
  */
 exports.create = function(req, res, next) {
-    var user = new User(req.body);
+	var user = new User(req.body);
 
-    user.provider = 'local';
+	user.provider = 'local';
 
-    // because we set our user.provider to local our models/user.js validation will always be true
-    req.assert('email', 'You must enter a valid email address').isEmail();
-    req.assert('password', 'Password must be at least 6 characters long').len(6);
-    req.assert('username', 'Username cannot be more than 100 characters').len(1, 100);
-    req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
+	// because we set our user.provider to local our models/user.js validation will always be true
+	req.assert('email', 'You must enter a valid email address').isEmail();
+	req.assert('password', 'Password must be at least 6 characters long').len(6);
+	req.assert('username', 'Username cannot be more than 100 characters').len(1, 100);
+	req.assert('confirmPassword', 'Passwords do not match').equals(req.body.password);
 
-    var errors = req.validationErrors();
-    if (errors) {
-        return res.status(400).send(errors);
-    }
+	var errors = req.validationErrors();
+	if (errors) {
+		return res.status(400).send(errors);
+	}
 
-    user.save(function(err) {
-        if (err) {
-            switch (err.code) {
-                case 11000:
-                case 11001:
-                    res.status(400).send('Username already taken');
-                    break;
-                default:
-                    res.status(400).send('Please fill all the required fields');
-            }
+	user.save(function(err) {
+		if (err) {
+			switch (err.code) {
+				case 11000:
+				case 11001:
+					res.status(400).send('Username already taken');
+					break;
+				default:
+					res.status(400).send('Please fill all the required fields');
+			}
 
-            return res.status(400);
-        }
-        req.logIn(user, function(err) {
-            if (err) return next(err);
-            return res.redirect('/');
-        });
-        res.status(200);
-    });
+			return res.status(400);
+		}
+		req.logIn(user, function(err) {
+			if (err) return next(err);
+			return res.redirect('/');
+		});
+		res.status(200);
+	});
 };
 
 /**
  * Send User
  */
 exports.me = function(req, res) {
-    res.jsonp(req.user || null);
+	res.jsonp(req.user || null);
 };
 
 /**
  * Find user by id
  */
 exports.user = function(req, res, next, id) {
-    User.findOne({
-        _id: id
-    }).exec(function(err, user) {
-        if (err) return next(err);
-        if (!user) return next(new Error('Failed to load User ' + id));
-        req.profile = user;
-        next();
-    });
+	User.findOne({
+		_id: id
+	}).exec(function(err, user) {
+		if (err) return next(err);
+		if (!user) return next(new Error('Failed to load User ' + id));
+		req.profile = user;
+		next();
+	});
 };
 
 /**
  * Remove user by id
  */
 exports.remove = function(req, res, next, id) {
-    User.findOne({
-        _id: id
-    }).exec(function(err, user) {
-        if (err) return next(err);
-        if (!user) return next(new Error('Failed to load User ' + id));
-        user.remove(function() {
-            next();
-        });
-    });
+	User.findOne({
+		_id: id
+	}).exec(function(err, user) {
+		if (err) return next(err);
+		if (!user) return next(new Error('Failed to load User ' + id));
+		user.remove(function() {
+			next();
+		});
+	});
 };
 
 /**
  * Update user by id
  */
+/*
 exports.update = function(req, res, next, user) {
 
     User.findOne({
@@ -129,4 +130,20 @@ exports.update = function(req, res, next, user) {
             next();
         });
     });
+};
+*/
+
+/**
+ * Return all users
+ *
+ * @return {array} [array of all the users]
+ */
+exports.getAll = function(req, res, next, callback) {
+	User.find({}, function(err, users) {
+		console.log(users);
+		if (err) {
+			return next(err);
+		}
+		callback(users);
+	});
 };

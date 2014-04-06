@@ -50,7 +50,7 @@ UserSchema.virtual('password').set(function(password) {
 	return this._password;
 });
 
-var User = mongoose.model('User', UserSchema);
+// var User = mongoose.model('User', UserSchema);
 
 /**
  * Validation
@@ -59,19 +59,19 @@ var validatePresenceOf = function(value) {
 	return value && value.length;
 };
 
-User.schema.path('firstName').validate(function(name) {
+UserSchema.path('firstName').validate(function(name) {
 	return (typeof name === 'string' && name.length > 0);
 }, 'First name cannot be blank');
 
-User.schema.path('email').validate(function(email) {
+UserSchema.path('email').validate(function(email) {
 	return (typeof email === 'string' && email.length > 0);
 }, 'Email cannot be blank');
 
-User.schema.path('username').validate(function(username) {
+UserSchema.path('username').validate(function(username) {
 	return (typeof username === 'string' && username.length > 0);
 }, 'Username cannot be blank');
 
-User.schema.path('hashed_password').validate(function(hashed_password) {
+UserSchema.path('hashed_password').validate(function(hashed_password) {
 	return (typeof hashed_password === 'string' && hashed_password.length > 0);
 }, 'Password cannot be blank');
 
@@ -156,5 +156,7 @@ UserSchema.methods = {
 		return obj;
 	}
 };
+
+mongoose.model('User', UserSchema);
 
 // module.exports = User;

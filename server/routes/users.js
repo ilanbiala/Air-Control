@@ -1,9 +1,22 @@
 'use strict';
 
+var config = require('../config/config')();
+
 // User routes use users controller
 var users = require('../controllers/users');
 
 module.exports = function(app, passport) {
+
+	app.get(config.routes.admin.users.url, function(req, res, next) {
+		users.getAll(req, res, next, function(users) {
+			res.render(config.routes.admin.users.page, {
+				locals: {
+					title: config.routes.admin.users.locals.title,
+					users: users
+				}
+			});
+		});
+	});
 
 	app.get('/panel/logout', users.signout);
 	// app.get('/panel/users/me', users.me);
@@ -19,8 +32,10 @@ module.exports = function(app, passport) {
 		res.send(req.isAuthenticated() ? req.user.name : '0');
 	});
 
-	app.get('/panel/users/remove/:id', function(req, res) {
-		res.render('/panel/users', {});
+	app.del('/panel/users/:id', function(req, res) {
+		res.json({
+
+		});
 	});
 
 	// Setting the local strategy route
