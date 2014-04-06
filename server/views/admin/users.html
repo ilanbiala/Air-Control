@@ -1,6 +1,7 @@
 <% include ../snippets/header.html %>
 
 <link rel="stylesheet" href="/styles/admin/panel.css">
+<link rel="stylesheet" href="/styles/admin/settings.css">
 <div class="off-canvas-wrap">
 	<div class="inner-wrap">
 		<nav class="tab-bar">
@@ -22,6 +23,24 @@
 			<% for (var i = 0; i < users.length; i++) { %>
 			<li><%= users[i].name %>, <%= users[i].permissions %></li>
 			<% } %>
+			<table>
+				<thead>
+					<tr>
+					<th>User</th>
+						<th>Role</th>
+						<th>Change Role</th>
+						<th>Remove User?</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Content Goes Here</td>
+						<td>This is longer Content Goes Here Donec id elit non mi porta gravida at eget metus.</td>
+						<td>Content Goes Here</td>
+						<td>Content Goes Here</td>
+					</tr>
+				</tbody>
+			</table>
 		</section>
 		<a class="exit-off-canvas"></a>
 	</div>
