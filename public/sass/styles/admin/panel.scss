@@ -2,8 +2,13 @@
 	min-height: 100%;
 }
 
+// .inner-wrap {
+// 	display: flex;
+// }
+
 .left-off-canvas-menu {
 	height: 100vh;
+	height: calc(100vh - 2.8125rem);
 }
 
 .move-right .exit-off-canvas {
