@@ -14,7 +14,7 @@ $(document).ready(function() {
 	$('#removeUser').on('click', function() {
 		$.ajax({
 			url: '/panel/users/' + whichUserToDelete,
-			type: 'DELETE '
+			type: 'DELETE'
 		}).done(function(response) {
 			alert('Response: ' + response);
 			console.log(response);

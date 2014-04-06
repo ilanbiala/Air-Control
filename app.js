@@ -2,7 +2,7 @@ var express = require('express'),
 	app = module.exports = express(),
 	morgan = require('morgan'), // logger
 	domain = require('domain'),
-	// expressValidator = require('express-validator'),
+	expressValidator = require('express-validator'),
 	errorHandler = require('express-error-handler'),
 	bodyParser = require('body-parser'), // access form data
 	favicon = require('static-favicon'), // favicon handler
@@ -15,7 +15,7 @@ var config = require('./server/config/config.js')();
 
 app.use(morgan('dev'));
 app.use(bodyParser());
-// app.use(expressValidator([])); // this line must be immediately after express.bodyParser()!
+app.use(expressValidator([])); // this line must be immediately after express.bodyParser()!
 app.use(passport.initialize());
 app.use(passport.session());
 
