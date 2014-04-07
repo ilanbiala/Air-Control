@@ -23,7 +23,7 @@
 		</aside>
 		<section class="main-section">
 			<br>
-			<table>
+			<table class="users">
 				<thead>
 					<tr>
 						<th>Name</th>
@@ -48,128 +48,143 @@
 				</tbody>
 			</table>
 			<br>
-			<form method="POST" action="/panel/users/create">
-				<div class="row">
-					<div class="small-9">
-						<div class="row">
-							<div class="small-4 columns">
-							<label for="firstName" class="right inline">First name</label>
-							</div>
-							<div class="small-8 columns">
-								<input type="text" id="firstName" name="firstName" placeholder="Johnny" required>
-							</div>
+			<div class="row">
+				<div class="small-9">
+					<div class="row">
+						<div class="small-2 columns">
+						</div>
+						<div class="small-10 columns">
+							<button data-reveal-id="addUserModal">Add user &nbsp;<i class="fi-plus"></i></button>
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="small-9">
-						<div class="row">
-							<div class="small-4 columns">
-								<label for="lastName" class="right inline">Last name</label>
-							</div>
-							<div class="small-8 columns">
-								<input type="text" id="lastName" name="lastName" placeholder="Appleseed" required>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="small-9">
-						<div class="row">
-							<div class="small-4 columns">
-								<label for="email" class="right inline">Email</label>
-							</div>
-							<div class="small-8 columns">
-								<input type="email" id="email" name="email" placeholder="johnny.appleseed@gmail.com" required>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="small-9">
-						<div class="row">
-							<div class="small-4 columns">
-								<label for="username" class="right inline">Username</label>
-							</div>
-							<div class="small-8 columns">
-								<input type="text" id="username" name="username" placeholder="johnny.appleseed" required>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="small-9">
-						<div class="row">
-							<div class="small-4 columns">
-								<label for="password" class="right inline">Password</label>
-							</div>
-							<div class="small-8 columns">
-								<input type="password" id="password" name="password" required>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="small-9">
-						<div class="row">
-							<div class="small-4 columns">
-								<label for="confirmPassword" class="right inline">Password again</label>
-							</div>
-							<div class="small-8 columns">
-								<input type="password" id="confirmPassword" name="confirmPassword" required>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="small-9">
-						<div class="row">
-							<div class="small-4 columns">
-								<label for="role" class="right inline">Role</label>
-							</div>
-							<div class="small-8 columns">
-								<select id="role" name="role">
-									<option value="writer" selected>writer</option>
-									<option value="editor">Editor</option>
-									<option value="administrator">Administrator</option>
-									<option value="superuser">Superuser</option>
-								</select>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="small-9">
-						<div class="row">
-							<div class="small-8 columns">
-							</div>
-							<div class="small-4 columns">
-								<button type="submit">Add user!</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</form>
+			</div>
 		</section>
 		<a class="exit-off-canvas"></a>
 	</div>
 </div>
 
+<div id="addUserModal" class="reveal-modal" data-reveal>
+	<form method="POST" action="/panel/users/create">
+		<div class="row">
+			<div class="small-9">
+				<div class="row">
+					<div class="small-4 columns">
+						<label for="firstName" class="right inline">First name</label>
+					</div>
+					<div class="small-8 columns">
+						<input type="text" id="firstName" name="firstName" placeholder="Johnny" required>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="small-9">
+				<div class="row">
+					<div class="small-4 columns">
+						<label for="lastName" class="right inline">Last name</label>
+					</div>
+					<div class="small-8 columns">
+						<input type="text" id="lastName" name="lastName" placeholder="Appleseed" required>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="small-9">
+				<div class="row">
+					<div class="small-4 columns">
+						<label for="email" class="right inline">Email</label>
+					</div>
+					<div class="small-8 columns">
+						<input type="email" id="email" name="email" placeholder="johnny.appleseed@gmail.com" required>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="small-9">
+				<div class="row">
+					<div class="small-4 columns">
+						<label for="username" class="right inline">Username</label>
+					</div>
+					<div class="small-8 columns">
+						<input type="text" id="username" name="username" placeholder="johnny.appleseed" required>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="small-9">
+				<div class="row">
+					<div class="small-4 columns">
+						<label for="password" class="right inline">Password</label>
+					</div>
+					<div class="small-8 columns">
+						<input type="password" id="password" name="password" required>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="small-9">
+				<div class="row">
+					<div class="small-4 columns">
+						<label for="confirmPassword" class="right inline">Password again</label>
+					</div>
+					<div class="small-8 columns">
+						<input type="password" id="confirmPassword" name="confirmPassword" required>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="small-9">
+				<div class="row">
+					<div class="small-4 columns">
+						<label for="role" class="right inline">Role</label>
+					</div>
+					<div class="small-8 columns">
+						<select id="role" name="role">
+							<option value="writer" selected>writer</option>
+							<option value="editor">Editor</option>
+							<option value="administrator">Administrator</option>
+							<option value="superuser">Superuser</option>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="small-10">
+				<div class="row">
+					<div class="small-3 columns">
+					</div>
+					<div class="small-9 columns">
+						<button id="addUser" class="button success">Add user!</button>
+						<button id="cancelAddUser" class="button alert">Cancel.</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
 <div id="removeUserModal" class="reveal-modal" data-reveal>
-  <h2>Are you sure you wish to remove this user?</h2>
-  <p>This action cannot be undone.</p>
-  <a href="#" id="removeUser" class="button success">Continue.</a>
-  <a href="#" id="cancelRemoveUser" class="button alert">Cancel.</a>
+	<h2>Are you sure you wish to remove this user?</h2>
+	<p>This action cannot be undone.</p>
+	<a href="#" id="removeUser" class="button success">Continue.</a>
+	<a href="#" id="cancelRemoveUser" class="button alert">Cancel.</a>
 </div>
 
 <div data-alert class="alert-box success radius">
-  <p>Way to go! That user is out of here!</p>
-  <a href="#" class="close">&times;</a>
+	<p class="content"></p>
+	<a href="#" class="close">&times;</a>
 </div>
 
 <div data-alert class="alert-box warning radius">
-  <p>Something went wrong, please try again.</p>
-  <a href="#" class="close">&times;</a>
+	<p class="content"></p>
+	<a href="#" class="close">&times;</a>
 </div>
 
 <script src="/scripts/admin/panel/users.js"></script>
