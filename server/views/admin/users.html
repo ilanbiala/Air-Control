@@ -40,7 +40,7 @@
 						<td><%= users[i].firstName %> <%= users[i].lastName %></td>
 						<td><%= users[i].username %></td>
 						<td><%= users[i].email %></td>
-						<td><%= users[i].permissions %></td>
+						<td><%= users[i].role %></td>
 						<td>Change password</td>
 						<td><a href="#" class="removeUserModalButton" data-user-id="<%= users[i]._id %>" data-reveal-id="removeUserModal"><i class="fi-x"></i></a></td>
 					</tr>
@@ -125,14 +125,14 @@
 					<div class="small-9">
 						<div class="row">
 							<div class="small-4 columns">
-								<label for="user-role" class="right inline">Role</label>
+								<label for="role" class="right inline">Role</label>
 							</div>
 							<div class="small-8 columns">
-								<select id="user-role" name="role">
-									<option value="superuser">Superuser</option>
-									<option value="administrator">Administrator</option>
+								<select id="role" name="role">
+									<option value="writer" selected>writer</option>
 									<option value="editor">Editor</option>
-									<option value="writer">writer</option>
+									<option value="administrator">Administrator</option>
+									<option value="superuser">Superuser</option>
 								</select>
 							</div>
 						</div>

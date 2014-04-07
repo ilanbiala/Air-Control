@@ -24,11 +24,15 @@ var UserSchema = new Schema({
 		type: String,
 		unique: true
 	},
-	roles: [{
-		type: String,
-		default: 'authenticated'
-	}],
-	// superuser, administrator, writer (cannot publish), editor (can publish)
+	role: {
+		type: Number
+	},
+	/**
+	 * superuser = 3
+	 * administrator = 2
+	 * editor = 1 (can publish)
+	 * writer = 0 (cannot publish)
+	 */
 	hashed_password: {
 		type: String
 	},

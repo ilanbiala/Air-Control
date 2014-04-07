@@ -33,8 +33,18 @@ module.exports = function(app, passport) {
 	});
 
 	app.del('/panel/users/:id', function(req, res) {
-		res.json({
-			"success": true
+		users.remove(req.params.id, function(err, docs) {
+			if (err) {
+				res.json({
+					"success": false,
+					"error": err
+				});
+			} else {
+				res.json({
+					"success": true,
+					"id": req.params.id
+				});
+			}
 		});
 	});
 

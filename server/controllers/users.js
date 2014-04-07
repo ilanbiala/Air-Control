@@ -89,28 +89,23 @@ exports.me = function(req, res) {
 /**
  * Find user by id
  */
-exports.user = function(req, res, next, id) {
-	User.findOne({
-		_id: id
-	}).exec(function(err, user) {
-		if (err) return next(err);
-		if (!user) return next(new Error('Failed to load User ' + id));
-		req.profile = user;
-		next();
+exports.user = function(id, callback) {
+	User.findById(id, function(err, user) {
+		if (err) return callback(err);
+		if (!user) return callback(new Error('Failed to load User ' + id));
+		return callback(err, user);
 	});
 };
 
 /**
  * Remove user by id
  */
-exports.remove = function(req, res, next, id) {
-	User.findOne({
-		_id: id
-	}).exec(function(err, user) {
-		if (err) return next(err);
-		if (!user) return next(new Error('Failed to load User ' + id));
-		user.remove(function() {
-			next();
+exports.remove = function(id, callback) {
+	User.findById(id, function(err, user) {
+		if (err) return callback(err);
+		if (!user) return callback(new Error('Failed to load User ' + id));
+		user.remove(function(err) {
+			return callback(err);
 		});
 	});
 };
@@ -119,16 +114,14 @@ exports.remove = function(req, res, next, id) {
  * Update user by id
  */
 /*
-exports.update = function(req, res, next, user) {
+exports.update = function(user, callback) {
 
     User.findOne({
         _id: id
     }).exec(function(err, user) {
         if (err) return next(err);
         if (!user) return next(new Error('Failed to load User ' + id));
-        user.remove(function() {
-            next();
-        });
+        callback(err, user);
     });
 };
 */
@@ -138,12 +131,10 @@ exports.update = function(req, res, next, user) {
  *
  * @return {array} [array of all the users]
  */
-exports.getAll = function(req, res, next, callback) {
+exports.getAll = function(callback) {
 	User.find({}, function(err, users) {
 		console.log(users);
-		if (err) {
-			return next(err);
-		}
-		callback(users);
+		if (err) return callback(err);
+		return callback(null, users);
 	});
 };
