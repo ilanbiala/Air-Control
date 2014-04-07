@@ -50,11 +50,15 @@ $(document).ready(function() {
 		});
 	});
 
-	$('#addUser').on('click', function() {
+	$('#addUser').on('click', function(evt) {
+		evt.preventDefault();
+		var userData = $('#addUserModal form').serialize();
 		$.ajax({
 			url: '/panel/users/create',
-			type: 'POST'
+			type: 'POST',
+			data: userData
 		}).done(function(response) {
+			console.log(response);
 			if (response.success === true) {
 				$('#addUserModal').foundation('reveal', 'close');
 				$('.alert-box.success').trigger('open.fndtn.alert-box');
