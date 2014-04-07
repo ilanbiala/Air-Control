@@ -1,9 +1,14 @@
+var path = require('path');
+
 module.exports = function(mode) {
 	var env = (mode || process.env.NODE_ENV || 'development');
 	var envConfig = require('./env/' + env);
+	var rootPath = path.normalize(__dirname + '/../../..');
+
 	return {
 		db: envConfig.db,
 		app: envConfig.app,
+		root: rootPath,
 		routes: {
 			home: {
 				url: '/',

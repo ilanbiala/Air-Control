@@ -8,7 +8,8 @@ var users = require('../controllers/users');
 module.exports = function(app, passport) {
 
 	app.get(config.routes.admin.users.url, function(req, res, next) {
-		users.getAll(req, res, next, function(users) {
+		users.getAll(function(err, users) {
+			if (err) res.redirect('500');
 			res.render(config.routes.admin.users.page, {
 				locals: {
 					title: config.routes.admin.users.locals.title,
