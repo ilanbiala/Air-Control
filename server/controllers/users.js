@@ -133,7 +133,6 @@ exports.update = function(user, callback) {
  */
 exports.getAll = function(callback) {
 	User.find({}, function(err, users) {
-		console.log(users);
 		if (err) return callback(err);
 		return callback(null, users);
 	});

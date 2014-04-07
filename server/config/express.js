@@ -70,26 +70,27 @@ module.exports = function(app, passport, db) {
     app.use(passport.initialize());
     app.use(passport.session());
 
-    // Set views path, template engine
     app.engine('.html', require('ejs').__express);
-    app.set('views', __dirname + '/server/views');
-
+    
     // set .html as the default extension
     app.set('view engine', 'html');
-
+    
+    // Set views path, template engine
+    app.set('views', config.root + '/server/views');
+    
     app.use(sass.middleware({
-        src: __dirname + '/public/sass',
-        dest: __dirname + '/public',
+        src: config.root + '/public/sass',
+        dest: config.root + '/public',
         outputStyle: 'compressed'
     }));
 
-    app.use(express.static(__dirname + '/public'));
-    app.use(favicon(__dirname + '/images/favicon.ico'));
+    app.use(express.static(config.root + '/public'));
+    app.use(favicon(config.root + '/public/images/favicon.ico'));
 
     app.use(function(err, req, res, next) {
         // only handle `next(err)` calls
         if (err) {
-            console.log('error');
+            console.log(err);
             res.redirect('error');
         }
     });
