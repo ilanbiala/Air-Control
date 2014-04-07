@@ -25,7 +25,8 @@ var UserSchema = new Schema({
 		unique: true
 	},
 	role: {
-		type: Number
+		type: Number,
+		default: 0
 	},
 	/**
 	 * superuser = 3
