@@ -1,120 +1,26 @@
-var express = require('express'),
-	app = module.exports = express(),
-	morgan = require('morgan'), // logger
-	domain = require('domain'),
-	expressValidator = require('express-validator'),
-	errorHandler = require('express-error-handler'),
-	bodyParser = require('body-parser'), // access form data
-	favicon = require('static-favicon'), // favicon handler
+var mongoose = require('mongoose'),
 	passport = require('passport'), // passport authentication
-	sass = require('node-sass'), // sass middleware
-	mongoose = require('mongoose'),
-	db = mongoose.connection;
+	domain = require('domain');
+// expressValidator = require('express-validator'),
+// errorHandler = require('express-error-handler'),
+
 
 var config = require('./server/config/config.js')();
 
-app.use(morgan('dev'));
-app.use(bodyParser());
-app.use(expressValidator([])); // this line must be immediately after express.bodyParser()!
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.engine('.html', require('ejs').__express);
-app.set('views', __dirname + '/server/views');
-app.set('view engine', 'html');
-
-app.use(sass.middleware({
-	src: __dirname + '/public/sass',
-	dest: __dirname + '/public',
-	outputStyle: 'compressed'
-}));
-
-app.use(express.static(__dirname + '/public'));
-app.use(favicon(__dirname + '/images/favicon.ico'));
-
-app.use(function(err, req, res, next) {
-	// only handle `next(err)` calls
-	if (err) {
-		console.log('error');
-		res.redirect('error');
-	}
-});
-
 /**
- * Models
+ * Load database, models, routes and controllers
  */
 
-require('./server/models/user');
-
-mongoose.connect(config.db.host, config.db.database);
-db.on('error', console.error.bind(console, 'Error:'));
-db.once('open', function() {
-
-});
-
-var users = require('./server/routes/users')(app, passport);
-
-// development only
-if (config.app.enviroment == 'development') {
-	app.use(errorHandler({
-		dumpExceptions: true,
-		showStack: true
-	}));
-}
-
-app.get(config.routes.home.url, function(req, res) {
-	res.render(config.routes.home.page, {
-		locals: config.routes.home.locals
-	});
-});
-
-app.get(config.routes.admin.panel.url, function(req, res) {
-	res.render(config.routes.admin.panel.page, {
-		locals: config.routes.admin.panel.locals
-	});
-});
-
-app.get(config.routes.admin.users.url, function(req, res) {
-	res.render(config.routes.admin.users.page, {
-		locals: config.routes.admin.users.locals
-	});
-});
-
-app.get(config.routes.admin.settings.url, function(req, res) {
-	res.render(config.routes.admin.settings.page, {
-		locals: config.routes.admin.settings.locals
-	});
-});
-
-// 404 page
-app.get(config.routes.error.notFound.url, function(req, res) {
-	res.render(config.routes.error.notFound.page, {
-		locals: config.routes.error.notFound.locals
-	});
-});
-
-// 500 page
-app.get(config.routes.error.server.url, function(req, res) {
-	res.render(config.routes.error.server.page, {
-		locals: config.routes.error.server.locals
-	});
-});
-
-app.get('/error', function(req, res) {
-	res.render('error', {
-		title: 'Node CMS | Error',
-		url: req.url,
-		originalUrl: req.originalUrl,
-		user: req.session ? req.session.user : null
-	});
-});
+var db = mongoose.connect(config.db.host, config.db.database);
+var app = require('./server/config/system/bootstrap')(passport, db);
 
 var serverDomain = domain.create();
 
 serverDomain.run(function() {
-	app.listen(config.app.port, function() {
+	var port = process.env.PORT || config.app.port;
+	app.listen(port, function() {
 
-		console.log('Express server listening on port ' + config.app.port + ' in ' + config.app.environment + ' mode.');
+		console.log('Server running on port ' + port + ' in ' + config.app.environment + ' mode.');
 
 		var reqd = domain.create();
 
@@ -128,4 +34,6 @@ serverDomain.run(function() {
 			}
 		});
 	});
+
+	exports = module.exports = app;
 });
