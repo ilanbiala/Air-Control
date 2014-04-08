@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - '0.10'
+before_install:
+  - currentfolder=${PWD##*/}
+  - if [ "$currentfolder" != 'node-cms' ]; then cd .. && eval "mv $currentfolder node-cms" && cd node-cms; fi
+
+# deploy: 
+# provider: npm
+# api_key: "YOUR API KEY"
+# on:
+#   - tags: true
