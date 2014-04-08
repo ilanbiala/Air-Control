@@ -42,7 +42,7 @@ exports.session = function(req, res) {
 /**
  * Create user
  */
-exports.create = function(req, res, next) {
+exports.create = function(req, res, callback) {
 	var user = new User(req.body);
 
 	user.provider = 'local';
@@ -72,7 +72,7 @@ exports.create = function(req, res, next) {
 			return res.status(400);
 		}
 		req.logIn(user, function(err) {
-			if (err) return next(err);
+			if (err) return callback(err);
 			return res.redirect('/');
 		});
 		res.status(200);

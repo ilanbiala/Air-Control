@@ -4,6 +4,9 @@ var mongoose = require('mongoose'),
 // expressValidator = require('express-validator'),
 // errorHandler = require('express-error-handler'),
 
+// var async = require('async');
+// 
+// MAKE THE serverDomain.run() synchronous
 
 var config = require('./server/config/config.js')();
 
