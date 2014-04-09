@@ -17,7 +17,7 @@
 	"homepage": "https://github.com/ilanbiala/node-cms",
 	"scripts": {
 		"start": "node app.js",
-		"test": "NODE_ENV=test mocha ",
+		"test": "NODE_ENV=test istanbul cover mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
 		"postinstall": "node node_modules/bower/bin/bower install"
 	},
 	"engines": {
@@ -29,8 +29,8 @@
 		"should": "^3.3.0",
 		"coveralls": "^2.10.0",
 		"mocha-lcov-reporter": "~0.0.1",
-		"blanket": "^1.1.6",
-		"supertest": "^0.10.0"
+		"supertest": "^0.10.0",
+		"istanbul": "~0.2.7"
 	},
 	"dependencies": {
 		"express": "~4.0.0",
