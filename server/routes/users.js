@@ -7,6 +7,17 @@ var users = require('../controllers/users');
 
 module.exports = function(app, passport) {
 
+	// Create a user
+	app.post('/panel/users/create', function(req, res) {
+		users.create(req, res, function(err, user) {
+			res.json({
+				"user": user,
+				"errors": err
+			});
+		});
+	});
+
+	// Get user
 	app.get(config.routes.admin.users.url, function(req, res, next) {
 		users.getAll(function(err, users) {
 			if (err) res.redirect('500');
@@ -19,12 +30,9 @@ module.exports = function(app, passport) {
 		});
 	});
 
-	app.get('/panel/logout', users.signout);
-	// app.get('/panel/users/me', users.me);
-
-	// Setup up the users api
-	app.post('/panel/users/create', function(req, res) {
-		users.create(req, res, function(err, user) {
+	// Update user
+	app.put('/panel/user', function(req, res) {
+		users.update(req.body, function(err, user) {
 			res.json({
 				"user": user,
 				"error": err
@@ -32,14 +40,7 @@ module.exports = function(app, passport) {
 		});
 	});
 
-	// Setup the userId param
-	app.param('userId', users.user);
-
-	// Route to check if user is authenticated
-	app.get('/panel/loggedin', function(req, res) {
-		res.send(req.isAuthenticated() ? req.user.name : '0');
-	});
-
+	// Delete
 	app.del('/panel/users/:id', function(req, res) {
 		users.remove(req.params.id, function(err, docs) {
 			if (err) {
@@ -55,6 +56,15 @@ module.exports = function(app, passport) {
 			}
 		});
 	});
+
+
+	// Route to check if user is authenticated
+	app.get('/panel/loggedin', function(req, res) {
+		res.send(req.isAuthenticated() ? req.user.name : '0');
+	});
+
+	app.get('/panel/logout', users.signout);
+
 
 	// Setting the local strategy route
 	app.post('/panel/login', passport.authenticate('local', {

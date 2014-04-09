@@ -7,8 +7,17 @@ function removeUserFromTable(user) {
 }
 
 function addUserToTable(user) {
-	var userHTMLString = '';
-	userHTMLString += '<tr id="' + user._id + '">' +
+	/*
+	$('.users').append(
+		$('<tr/>')
+		.attr("id", "newDiv1")
+		.addClass("newDiv purple bloated")
+		.append("<span/>")
+		.text("hello world")
+	);
+	*/
+
+	var userHTMLString = '<tr id="' + user._id + '">' +
 		'<td>' + user.firstName + ' ' + user.lastName + '</td>' +
 		'<td>' + user.email + '</td>' +
 		'<td>' + user.role + '</td>' +
@@ -27,8 +36,9 @@ $(document).ready(function() {
 		whichUserToDelete = $(this).attr('data-user-id');
 	});
 
-	$('#cancelRemoveUser, #cancelAddUser').on('click', function() {
-		$(this).parent().foundation('reveal', 'close');
+	$('#cancelRemoveUser, #cancelAddUser').on('click', function(e) {
+		e.preventDefault();
+		$(".reveal-modal").foundation('reveal', 'close');
 	});
 
 	$('#removeUser').on('click', function() {
@@ -59,7 +69,15 @@ $(document).ready(function() {
 			data: userData
 		}).done(function(response) {
 			console.log(response);
-			if (response.success === true) {
+			if (response.errors.length > 0) {
+				var errorMsg;
+				for (var i = response.errors.length - 1; i >= 0; i--) {
+					errorMsg += response.errors[i];
+					errorMsg += '\n';
+				};
+
+				alert(errorMsg);
+			} else {
 				$('#addUserModal').foundation('reveal', 'close');
 				$('.alert-box.success').trigger('open.fndtn.alert-box');
 				addUserToTable(response.user);
@@ -67,7 +85,7 @@ $(document).ready(function() {
 		}).fail(function(err) {
 			alert('Error: ' + err);
 			console.log(err);
-			$('#addUserModal').foundation('reveal', 'close');
+			// $('#addUserModal').foundation('reveal', 'close');
 			$('.alert-box.warning').trigger('open.fndtn.alert-box');
 		});
 	});

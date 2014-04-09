@@ -56,9 +56,13 @@ exports.create = function(req, res, callback) {
 	var errors = req.validationErrors();
 	if (errors) {
 		console.log("Errors: ", errors);
-		return res.status(400).send(errors);
+		return callback(errors);
 	}
 
+	return saveUser(user, callback);
+};
+
+function saveUser(user, callback) {
 	user.save(function(err) {
 		if (err) {
 			console.log("Error saving user: ", err);
@@ -73,33 +77,21 @@ exports.create = function(req, res, callback) {
 			return callback(err);
 		}
 
-		req.logIn(user, function(err) {
-			if (err) {
-				console.log("Error logging in user: ", err);
-				return callback(err);
-			}
-			return callback(err, user);
-		});
+		return callback(err, user);
 	});
-};
-
-/**
- * Send User
- */
-exports.me = function(req, res) {
-	res.jsonp(req.user || null);
-};
+}
 
 /**
  * Find user by id
  */
-exports.user = function(id, callback) {
+exports.findById = function(id, callback) {
 	User.findById(id, function(err, user) {
 		if (err) return callback(err);
 		if (!user) return callback(new Error('Failed to load User ' + id));
 		return callback(err, user);
 	});
 };
+
 
 /**
  * Remove user by id
@@ -116,19 +108,21 @@ exports.remove = function(id, callback) {
 
 /**
  * Update user by id
+ * Updates is a key value map
  */
-/*
-exports.update = function(user, callback) {
+exports.update = function(userId, updates, callback) {
 
-    User.findOne({
-        _id: id
-    }).exec(function(err, user) {
-        if (err) return next(err);
-        if (!user) return next(new Error('Failed to load User ' + id));
-        callback(err, user);
-    });
+	User.findOne(userId, function(err, user) {
+		if (err) return next(err);
+		if (!user) return next(new Error('Failed to load User ' + id));
+
+		for (var key in updates) {
+			user[key] = updates[key];
+		}
+
+		return saveUser(user, callback);
+	});
 };
-*/
 
 /**
  * Return all users

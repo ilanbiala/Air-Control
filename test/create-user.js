@@ -6,7 +6,6 @@ var should = require('should'),
 describe('Creating a user', function() {
 	it('should create and store a user in the database using the route', function(done) {
 
-
 		// make the request to the route with the user data
 		request(app)
 			.post('/panel/users/create')
@@ -26,8 +25,8 @@ describe('Creating a user', function() {
 					throw err;
 				}
 
-				// check the database for the user
-				users.user(createdUser._id, function(err, user) {
+				// check that the created user exists
+				users.findById(createdUser._id, function(err, user) {
 					if (err) {
 						throw err;
 					}
