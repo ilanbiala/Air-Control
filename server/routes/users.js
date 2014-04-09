@@ -23,7 +23,14 @@ module.exports = function(app, passport) {
 	// app.get('/panel/users/me', users.me);
 
 	// Setup up the users api
-	app.post('/panel/users/create', users.create);
+	app.post('/panel/users/create', function(req, res) {
+		users.create(req, res, function(err, user) {
+			res.json({
+				"user": user,
+				"error": err
+			});
+		});
+	});
 
 	// Setup the userId param
 	app.param('userId', users.user);

@@ -1,12 +1,9 @@
 var mongoose = require('mongoose'),
 	passport = require('passport'), // passport authentication
 	domain = require('domain');
+
 // expressValidator = require('express-validator'),
 // errorHandler = require('express-error-handler'),
-
-// var async = require('async');
-// 
-// MAKE THE serverDomain.run() synchronous
 
 var config = require('./server/config/config.js')();
 
@@ -37,6 +34,5 @@ serverDomain.run(function() {
 			}
 		});
 	});
-
 	exports = module.exports = app;
 });

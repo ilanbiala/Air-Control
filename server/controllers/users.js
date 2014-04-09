@@ -55,27 +55,31 @@ exports.create = function(req, res, callback) {
 
 	var errors = req.validationErrors();
 	if (errors) {
+		console.log("Errors: ", errors);
 		return res.status(400).send(errors);
 	}
 
 	user.save(function(err) {
 		if (err) {
+			console.log("Error saving user: ", err);
 			switch (err.code) {
 				case 11000:
 				case 11001:
 					res.status(400).send('Username already taken');
 					break;
 				default:
-					res.status(400).send('Please fill all the required fields');
+					console.log('Please fill all the required fields.');
 			}
-
-			return res.status(400);
+			return callback(err);
 		}
+
 		req.logIn(user, function(err) {
-			if (err) return callback(err);
-			return res.redirect('/');
+			if (err) {
+				console.log("Error logging in user: ", err);
+				return callback(err);
+			}
+			return callback(err, user);
 		});
-		res.status(200);
 	});
 };
 
