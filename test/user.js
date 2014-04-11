@@ -17,8 +17,7 @@ describe('Accessing the users page', function() {
 					throw err;
 				}
 				done();
-				});
-			});
+		});
 	});
 });
 
