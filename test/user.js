@@ -5,6 +5,23 @@ var should = require('should'),
 
 var testUserID;
 
+describe('Accessing the users page', function() {
+	it('should successfully GET the users page', function(done) {
+
+		// post the request to the route with the user data
+		request(app)
+			.get('/panel/users')
+			.expect(200)
+			.end(function(err, res) {
+				if (err) {
+					throw err;
+				}
+				done();
+				});
+			});
+	});
+});
+
 describe('Creating a user', function() {
 	it('should create and store a user in the database using the route', function(done) {
 
