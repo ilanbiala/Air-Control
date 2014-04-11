@@ -22,5 +22,5 @@ To start the server, run `node-dev app.js`.
 [coveralls-image]: https://coveralls.io/repos/ilanbiala/node-cms/badge.png?branch=master
 [coveralls-url]: https://coveralls.io/r/ilanbiala/node-cms?branch=master
 
-[daviddm-image]: https://david-dm.org/ilanbiala/node-cms.png
+[daviddm-image]: https://david-dm.org/ilanbiala/node-cms
 [daviddm-url]: https://david-dm.org/ilanbiala/node-cms.png?theme=shields.io
