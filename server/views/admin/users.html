@@ -24,7 +24,8 @@
 		<aside class="left-off-canvas-menu">
 			<ul class="off-canvas-list">
 				<li><label>Menu</label></li>
-				<li><a href="/panel/users">Users</a></li>
+				<li><a href="/panel/users"><p>Users</p><i class="fi-plus pull-right"></i></a></li>
+				<li><a href="/panel/pages"><p>Pages</p><i class="fi-plus pull-right"></i></a></li>
 				<li><a href="/panel/settings">Settings</a></li>
 			</ul>
 		</aside>
@@ -43,13 +44,13 @@
 				</thead>
 				<tbody>
 					<% for (var i = 0; i < users.length; i++) { %>
-					<tr id="<%= users[i]._id %>">
+					<tr id="<%= users[i].id %>">
 						<td><%= users[i].firstName %> <%= users[i].lastName %></td>
 						<td><%= users[i].username %></td>
 						<td><%= users[i].email %></td>
 						<td><%= roles[users[i].role] %></td>
 						<td>Change password</td>
-						<td><a href="#" class="removeUserModalButton" data-user-id="<%= users[i]._id %>" data-reveal-id="removeUserModal"><i class="fi-x"></i></a></td>
+						<td><a href="#" class="removeUserModalButton" data-user-id="<%= users[i].id %>" data-reveal-id="removeUserModal"><i class="fi-x"></i></a></td>
 					</tr>
 					<% } %>
 				</tbody>

@@ -7,25 +7,46 @@ function removeUserFromTable(user) {
 }
 
 function addUserToTable(user) {
-	/*
 	$('.users').append(
 		$('<tr/>')
-		.attr("id", "newDiv1")
-		.addClass("newDiv purple bloated")
-		.append("<span/>")
-		.text("hello world")
+		.attr('id', user.id)
+		.append('<td/>')
+		.text(user.firstName + ' ' + user.lastName)
+		.append('<td/>')
+		.text(user.role)
+		.append('<td/>')
+		.text('Change password')
+		.append('<td/>')
+		.text(
+			$('<a/>')
+			.attr('href', '#')
+			.addClass('removeUserModalButton')
+			.attr('data-user-id', user.id)
+			.attr('data-reveal-id', 'removeUserModal')
+			.text(
+				$('<i/>')
+				.addClass('fi-x'))
+		)
 	);
-	*/
-
-	var userHTMLString = '<tr id="' + user._id + '">' +
-		'<td>' + user.firstName + ' ' + user.lastName + '</td>' +
-		'<td>' + user.email + '</td>' +
-		'<td>' + user.role + '</td>' +
-		'<td>Change password</td>' +
-		'<td><a href="#" class="removeUserModalButton" data-user-id="' + user._id + '" data-reveal-id="removeUserModal"><i class="fi-x"></i></a></td>' +
-		'</tr>';
-	$('.users').append(userHTMLString);
 }
+
+function generateErrorStatement(errors) {
+	var errorMsg;
+	for (var i = errors.length - 1; i >= 0; i--) {
+		errorMsg += errors[i];
+		errorMsg += '\n';
+	}
+	return errorMsg;
+}
+
+// var userHTMLString = '<tr id="' + user._id + '">' +
+// 	'<td>' + user.firstName + ' ' + user.lastName + '</td>' +
+// 	'<td>' + user.email + '</td>' +
+// 	'<td>' + user.role + '</td>' +
+// 	'<td>Change password</td>' +
+// 	'<td><a href="#" class="removeUserModalButton" data-user-id="' + user._id + '" data-reveal-id="removeUserModal"><i class="fi-x"></i></a></td>' +
+// 	'</tr>';
+// $('.users').append(userHTMLString);
 
 $(document).ready(function() {
 	$(document).foundation();
@@ -38,7 +59,7 @@ $(document).ready(function() {
 
 	$('#cancelRemoveUser, #cancelAddUser').on('click', function(e) {
 		e.preventDefault();
-		$(".reveal-modal").foundation('reveal', 'close');
+		$('.reveal-modal').foundation('reveal', 'close');
 	});
 
 	$('#removeUser').on('click', function() {
@@ -60,8 +81,8 @@ $(document).ready(function() {
 		});
 	});
 
-	$('#addUser').on('click', function(evt) {
-		evt.preventDefault();
+	$('#addUser').on('click', function(e) {
+		e.preventDefault();
 		var userData = $('#addUserModal form').serialize();
 		$.ajax({
 			url: '/panel/users/create',
@@ -70,23 +91,22 @@ $(document).ready(function() {
 		}).done(function(response) {
 			console.log(response);
 			if (response.errors.length > 0) {
-				var errorMsg;
-				for (var i = response.errors.length - 1; i >= 0; i--) {
-					errorMsg += response.errors[i];
-					errorMsg += '\n';
-				};
-
-				alert(errorMsg);
+				var errorMessage = generateErrorStatement(response.errors);
+				$('.alert-box.warning').trigger('open.fndtn.alert-box');
+				$('.alert-box.warning p.content').text(errorMessage);
 			} else {
 				$('#addUserModal').foundation('reveal', 'close');
 				$('.alert-box.success').trigger('open.fndtn.alert-box');
+				$('.alert-box.success p.content').text('The user has been created.');
 				addUserToTable(response.user);
 			}
 		}).fail(function(err) {
-			alert('Error: ' + err);
 			console.log(err);
-			// $('#addUserModal').foundation('reveal', 'close');
-			$('.alert-box.warning').trigger('open.fndtn.alert-box');
+			if (err.length > 0) {
+				var errorMessage = generateErrorStatement(err);
+				$('.alert-box.warning').trigger('open.fndtn.alert-box');
+				$('.alert-box.warning p.content').text(errorMessage);
+			}
 		});
 	});
 });
