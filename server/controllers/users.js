@@ -66,14 +66,16 @@ function saveUser(user, callback) {
 	user.save(function(err) {
 		if (err) {
 			console.log("Error saving user: ", err);
+
 			switch (err.code) {
 				case 11000:
 				case 11001:
-					res.status(400).send('Username already taken');
-					break;
+					// res.status(400).send('Username already taken');
+					return callback('Username already taken');
 				default:
-					console.log('Please fill all the required fields.');
+					return callback('Please fill all the required fields.');
 			}
+
 			return callback(err);
 		}
 

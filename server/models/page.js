@@ -7,7 +7,7 @@ var mongoose = require('mongoose'),
 	Schema = mongoose.Schema;
 
 /**
- * User Schema
+ * Page Schema
  */
 var PageSchema = new Schema({
 	title: {
