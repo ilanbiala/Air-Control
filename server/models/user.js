@@ -157,7 +157,7 @@ UserSchema.methods = {
 		delete obj.hashed_password;
 		delete obj.salt;
 		obj.dateCreated = this._id.getTimestamp();
-		obj._id = this._id.toString();
+		obj.id = this._id.toString();
 		return obj;
 	}
 };
