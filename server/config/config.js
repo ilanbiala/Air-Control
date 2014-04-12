@@ -6,7 +6,10 @@ module.exports = function(mode) {
 	var rootPath = path.normalize(__dirname + '/../..');
 
 	return {
-		db: envConfig.db,
+		db: {
+			host: envConfig.db.host,
+			database: 'aircontrol'
+		},
 		app: envConfig.app,
 		root: rootPath,
 		routes: {

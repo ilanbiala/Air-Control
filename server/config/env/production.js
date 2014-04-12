@@ -1,7 +1,6 @@
 module.exports = {
 	db: {
-		host: 'localhost',
-		database: 'production'
+		host: 'localhost'
 	},
 	app: {
 		environment: 'production',
