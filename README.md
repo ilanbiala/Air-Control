@@ -3,6 +3,8 @@ Node CMS
 
 [![Build Status][travis-image]][travis-url] [![Coveralls Status][coveralls-image]][coveralls-url] [![Dependency Status][daviddm-url]][daviddm-image]
 
+For a quick demo, take a look at the [live app](http://nodecms.herokuapp.com).
+
 # Setup
 
 Just run `npm install` and that will handle installing all the dependencies and will also run `bower install`.
