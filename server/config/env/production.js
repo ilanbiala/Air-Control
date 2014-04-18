@@ -1,6 +1,7 @@
 module.exports = {
 	db: {
-		host: 'localhost'
+		host: 'localhost',
+		database: 'aircontrol'
 	},
 	app: {
 		environment: 'production',
