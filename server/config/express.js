@@ -161,7 +161,6 @@ module.exports = function(app, passport, db) {
 				var stat = fs.statSync(newPath);
 				if (stat.isFile()) {
 					if (/(.*)\.(js$|coffee$)/.test(file)) {
-						console.log('Route: ', newPath);
 						require(newPath)(app, passport);
 					}
 					// We skip the app/routes/middlewares directory as it is meant to be
