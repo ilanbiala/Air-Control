@@ -15,14 +15,14 @@ To run the server in a specific environment prefix the command with `NODE_ENV=`.
 
 To start the server, run `node-dev app.js`.
 
-[npm-image]: https://badge.fury.io/js/air-control.png
-[npm-url]: https://npmjs.org/package/air-control
+[npm-image]: https://badge.fury.io/js/Air-Control.png
+[npm-url]: https://npmjs.org/package/Air-Control
 
-[travis-image]: https://travis-ci.org/ilanbiala/air-control.svg?branch=master
-[travis-url]: https://travis-ci.org/ilanbiala/air-control
+[travis-image]: https://travis-ci.org/ilanbiala/Air-Control.svg?branch=master
+[travis-url]: https://travis-ci.org/ilanbiala/Air-Control
 
-[coveralls-image]: https://coveralls.io/repos/ilanbiala/air-control/badge.png?branch=master
-[coveralls-url]: https://coveralls.io/r/ilanbiala/air-control?branch=master
+[coveralls-image]: https://coveralls.io/repos/ilanbiala/Air-Control/badge.png?branch=master
+[coveralls-url]: https://coveralls.io/r/ilanbiala/Air-Control?branch=master
 
 [daviddm-image]: https://david-dm.org/ilanbiala/air-control
 [daviddm-url]: https://david-dm.org/ilanbiala/air-control.png?theme=shields.io
