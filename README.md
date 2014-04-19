@@ -1,4 +1,4 @@
-Node CMS
+Air Control
 =======
 
 [![Build Status][travis-image]][travis-url] [![Coveralls Status][coveralls-image]][coveralls-url] [![Dependency Status][daviddm-url]][daviddm-image]
@@ -15,14 +15,14 @@ To run the server in a specific environment prefix the command with `NODE_ENV=`.
 
 To start the server, run `node-dev app.js`.
 
-[npm-image]: https://badge.fury.io/js/generator-kirby.png
-[npm-url]: https://npmjs.org/package/generator-kirby
+[npm-image]: https://badge.fury.io/js/Air-Control.png
+[npm-url]: https://npmjs.org/package/Air-Control
 
-[travis-image]: https://travis-ci.org/ilanbiala/node-cms.svg?branch=master
-[travis-url]: https://travis-ci.org/ilanbiala/node-cms
+[travis-image]: https://travis-ci.org/ilanbiala/Air-Control.svg?branch=master
+[travis-url]: https://travis-ci.org/ilanbiala/Air-Control
 
-[coveralls-image]: https://coveralls.io/repos/ilanbiala/node-cms/badge.png?branch=master
-[coveralls-url]: https://coveralls.io/r/ilanbiala/node-cms?branch=master
+[coveralls-image]: https://coveralls.io/repos/ilanbiala/Air-Control/badge.png?branch=master
+[coveralls-url]: https://coveralls.io/r/ilanbiala/Air-Control?branch=master
 
-[daviddm-image]: https://david-dm.org/ilanbiala/node-cms
-[daviddm-url]: https://david-dm.org/ilanbiala/node-cms.png?theme=shields.io
+[daviddm-image]: https://david-dm.org/ilanbiala/air-control
+[daviddm-url]: https://david-dm.org/ilanbiala/air-control.png?theme=shields.io

@@ -80,7 +80,6 @@ UserSchema.path('hashed_password').validate(function(hashed_password) {
 	return (typeof hashed_password === 'string' && hashed_password.length > 0);
 }, 'Password cannot be blank');
 
-
 /**
  * Pre-save hook
  */
