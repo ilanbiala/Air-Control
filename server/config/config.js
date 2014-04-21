@@ -8,7 +8,7 @@ module.exports = function(mode) {
 	return {
 		db: {
 			host: envConfig.db.host,
-			database: envConfig.db.database
+			database: 'aircontrol'
 		},
 		app: envConfig.app,
 		root: rootPath,

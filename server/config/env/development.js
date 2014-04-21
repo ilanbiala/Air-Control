@@ -1,11 +1,10 @@
 module.exports = {
 	db: {
-		host: 'localhost',
-		database: 'aircontrol-dev'
+		host: 'localhost'
 	},
 	app: {
 		environment: 'development',
-		name: 'Node CMS - Dev',
+		name: 'Air Control - Dev',
 		port: process.env.PORT || 3000
 	}
 };

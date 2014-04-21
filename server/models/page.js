@@ -24,6 +24,9 @@ var PageSchema = new Schema({
 	template: {
 		type: Schema.Types.Mixed
 	},
+	content: {
+		type: Schema.Types.Mixed
+	},
 	/**
 	 * 0 = Users only
 	 * 1 = Unlisted, not index
